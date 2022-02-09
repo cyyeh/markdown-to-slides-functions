@@ -31,29 +31,38 @@ marpit.themeSet.default = marpit.themeSet.add(theme)
 
 
 exports.handler = async event => {
-  const markdown = JSON.parse(event.body)['markdown']
-  console.log(markdown)
-  const { html, css } = marpit.render(markdown)
-  const htmlFile = `
-  <!DOCTYPE html>
-  <html>
-  <head>
-    <style>${css}</style>
-  </head>
-  <body>
-    ${html}
-  </body>
-  </html>
-  `
+  const headers = {
+    /* Required for CORS support to work */
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Headers': 'Content-Type',
+    "Access-Control-Allow-Methods": 'GET, POST, OPTION',
+  }
 
-  return {
-    statusCode: 200,
-    headers: {
-      /* Required for CORS support to work */
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Headers': 'Content-Type',
-      "Access-Control-Allow-Methods": 'POST, OPTION',
-    },
-    body: htmlFile
+  if (event.httpMethod === 'OPTIONS') {
+    return {
+      statusCode: 200,
+      headers,
+      body: 'Successful preflight call.'
+    }
+  } else if (event.httpMethod === 'POST') {
+    const markdown = JSON.parse(event.body)['markdown']
+    const { html, css } = marpit.render(markdown)
+    const htmlString = `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <style>${css}</style>
+    </head>
+    <body>
+      ${html}
+    </body>
+    </html>
+    `
+  
+    return {
+      statusCode: 200,
+      headers,
+      body: htmlString
+    }
   }
 }
