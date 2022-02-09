@@ -1,4 +1,5 @@
 {
+  "type": "module",
   "dependencies": {
     "@marp-team/marpit": "^2.2.2"
   }
