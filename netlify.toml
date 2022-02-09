@@ -1,2 +1,5 @@
 [build]
   functions = ".netlify/functions"
+[headers.values]
+  Access-Control-Allow-Origin = "*"
+  Access-Control-Allow-Methods = "POST, OPTION"
