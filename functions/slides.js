@@ -10,7 +10,7 @@ body {
 
 section {
   width: 100%;
-  max-height: 500px;
+  height: 100vh;
   background-color: #369;
   color: #fff;
   font-size: 30px;
@@ -48,15 +48,10 @@ exports.handler = async event => {
     const markdown = JSON.parse(event.body)['markdown']
     const { html, css } = marpit.render(markdown)
     const htmlString = `
-    <!DOCTYPE html>
-    <html>
-    <head>
-      <style>${css}</style>
-    </head>
     <body>
+      <style>${css}</style>
       ${html}
     </body>
-    </html>
     `
   
     return {
