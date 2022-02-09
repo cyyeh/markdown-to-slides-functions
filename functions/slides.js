@@ -50,9 +50,7 @@ exports.handler = async event => {
     statusCode: 200,
     headers: {
       /* Required for CORS support to work */
-      'access-control-allow-origin': '*',
-      /* Required for cookies, authorization headers with HTTPS */
-      'access-control-allow-credentials': true
+      'access-control-allow-origin': '*'
     },
     body: htmlFile
   }
