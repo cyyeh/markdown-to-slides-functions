@@ -48,7 +48,7 @@ exports.handler = async event => {
 
   return {
     statusCode: 200,
-    heders: {
+    headers: {
       /* Required for CORS support to work */
       'Access-Control-Allow-Origin': '*',
       /* Required for cookies, authorization headers with HTTPS */
